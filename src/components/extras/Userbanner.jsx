@@ -107,8 +107,7 @@ const Userbanner = () => {
 
 
             <div className='column is-3'>
-                {/*<img className='dashboardimageAnimated' src="/assets/images/ticket.png" alt="something"*/}
-                {/*     style={{height: '90%'}}/>*/}
+
                 <Speedo/>
             </div>
 

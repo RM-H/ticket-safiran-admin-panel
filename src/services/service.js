@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export const url = 'https://ticket.metamax.network/api/v1'
+export const url = 'https://api.bilitim.net/api/v1'
 
 // bearer
 // const config = {

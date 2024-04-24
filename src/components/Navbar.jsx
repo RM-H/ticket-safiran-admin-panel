@@ -1,8 +1,8 @@
 import {Email,Settings} from '@mui/icons-material'
-import {useSelector} from "react-redux";
-import {userinfoSelector,dashboardSelector} from "../slices/UserSlice";
+import {useSelector,useDispatch} from "react-redux";
+import {userinfoSelector,dashboardSelector,environmentSelector,changeEnv} from "../slices/UserSlice";
 import Spinner from "./extras/Spinner";
-import {Badge, Menu} from '@mui/material'
+import {Badge, FormControl, InputLabel, Menu, Select} from '@mui/material'
 import {useNavigate} from 'react-router-dom'
 import Button from '@mui/material/Button';
 import {useState} from "react";
@@ -13,6 +13,8 @@ import MenuItem from '@mui/material/MenuItem';
 
 
 const Navbar = () => {
+
+    const dispatch = useDispatch()
 
 
 
@@ -31,6 +33,7 @@ const Navbar = () => {
     const dataneeded = useSelector(userinfoSelector)
     const status = useSelector((state) => state.userinfo.status)
     const notifications = useSelector(dashboardSelector)
+    const selectedEnv = useSelector(environmentSelector)
     const nav = useNavigate()
 
 
@@ -56,14 +59,47 @@ const Navbar = () => {
 
         }
     }
+
+
+
+    // changing Website thats changing
+    const handleEnvChange = (e)=>{
+        dispatch(changeEnv(e.target.value))
+
+    }
     return (
         <>
             <header className='is-flex is-align-content-center'>
                 <div className="navbar__bl">
                     <nav className="navbar" role="navigation" aria-label="main navigation">
                         <div className="navbar-brand">
+                            {/*drop down*/}
+                            <FormControl variant='standard' color='secondary'
+                                         className='yekan' sx={{minWidth:'10rem' , my:'auto'}}>
+                                <InputLabel className='yekan' id="demo-simple-select-label">انتخاب محیط</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    defaultValue={1}
+                                    onChange={handleEnvChange}
+
+                                    label="Age"
+                                    className='yekan'
+
+
+
+                                >
+                                    <MenuItem className='yekan' value={1}>بیلیتیم</MenuItem>
+                                    <MenuItem className='yekan' value={2}>سفیران نوآوری و اندیشه</MenuItem>
+
+                                </Select>
+                            </FormControl>
+
+
+
+                            {/*changing image based on selected env*/}
                             <p className="navbar-item logo">
-                                <img src="/assets/images/logo.png" draggable='false' style={{maxHeight:"none"}} width="240" height="50"/>
+                                <img src={`/assets/icons/${selectedEnv===1 ? 'logo-biliti.svg':'logo-safir.svg'}`} draggable='false' style={{maxHeight:"3rem"}} width="200"/>
                             </p>
 
                             <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false"
@@ -72,6 +108,8 @@ const Navbar = () => {
                                 <span aria-hidden="true"></span>
                                 <span aria-hidden="true"></span>
                             </a>
+
+
                         </div>
 
 
@@ -79,14 +117,14 @@ const Navbar = () => {
                         <div className="navbar-start ">
                             <div className="navbar-item">
                                 <div className="header__icons is-flex  ">
-                                    <Badge className={notifications.unseen_contacts_count!==0 && 'dashboardimageAnimated'} badgeContent={notifications.unseen_contacts_count} color='error'>
+                                    <Badge className={notifications.unseen_contacts_count >0 && 'dashboardimageAnimated'} badgeContent={notifications.unseen_contacts_count} color='error'>
                                         <Email  onClick={()=>nav('/admin/messages')} />
                                     </Badge>
 
 
                                 </div>
                                 <div className="is-flex  userinfo">
-                                    <img src="/images/avatar.png" alt=""/>
+
                                     <div className=" is-flex is-flex-direction-column info">
                                         {content}
                                         <h4 className="has-text-black">سوپر ادمین</h4>

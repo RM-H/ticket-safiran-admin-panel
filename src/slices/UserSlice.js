@@ -9,6 +9,7 @@ const initialstate = {
     items: [],
     notifications :0 ,
     dashboard:[],
+    env:1,
 
     status: ''
 }
@@ -32,6 +33,11 @@ const userSlice = createSlice({
             state.dashboard=action.payload;
 
         }
+        ,
+        changeEnv(state,action){
+            state.env=action.payload;
+
+        }
 
     },
 
@@ -40,7 +46,7 @@ const userSlice = createSlice({
 
 
 export default userSlice.reducer;
-export const {adduserinfo,addnotif,addDashboard} = userSlice.actions
+export const {adduserinfo,addnotif,addDashboard ,changeEnv} = userSlice.actions
 
 // // ---------------------------------Selectors-----------------------------
 export const userinfoSelector = createDraftSafeSelector(
@@ -58,3 +64,10 @@ export const dashboardSelector = createDraftSafeSelector(
     (state) => state.userinfo.dashboard
 )
 
+
+
+// changing between bilitim and safiran
+export const environmentSelector = createDraftSafeSelector(
+    (state) => state,
+    (state) => state.userinfo.env
+)

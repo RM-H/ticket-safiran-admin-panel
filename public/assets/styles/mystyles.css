@@ -94,8 +94,17 @@ body {
     align-items: center;
     min-height: 100vh;
 
-    background: #eee;
+
     /* background: linear-gradient(to bottom, #0f0c29, #302b63,#24243e); */
+}
+.body-safir {
+    background: rgba(0, 166, 81, 0.10);
+
+}
+
+
+.body-bilit {
+    background: rgba(162, 152, 192, 0.15);
 }
 
 /* login page */
