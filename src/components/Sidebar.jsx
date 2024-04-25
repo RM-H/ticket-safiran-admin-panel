@@ -4,6 +4,7 @@ import {
     Receipt,
     MusicNote,
     TipsAndUpdates,
+    ArticleOutlined,
 
     LiveTv,
     CreditCard,
@@ -126,6 +127,15 @@ const Sidebar = () => {
 
             <Home/>
             <h3>داشبورد</h3>
+        </div>
+
+
+        <div className={`dashboard__menu ${active === 3 && 'dashboardActive'}`} onClick={() => {
+            nav('/admin/blogs');
+            setActive(3)
+        }}>
+            <ArticleOutlined/>
+            <h3> بلاگ </h3>
         </div>
 
 

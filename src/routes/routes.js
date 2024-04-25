@@ -8,7 +8,7 @@ import {
 
 } from "react-router-dom";
 
-import {Landing, Login,SiteSettings,Messages,PasswordChange,SiteInfoSettings,SiteFaqSettings,Singers,Cities,Salone,SaloneEdit,AddEvent,Events,EditEvent,Sans,SansEdit,Orders,OrderDetails,Print,Seating,About,LiveEdit,Addlive} from '../pages'
+import {Landing, Login,SiteSettings,Messages,PasswordChange,SiteInfoSettings,SiteFaqSettings,Singers,Cities,Salone,SaloneEdit,AddEvent,Events,EditEvent,Sans,SansEdit,Orders,OrderDetails,Print,Seating,About,LiveEdit,Addlive,Blogs} from '../pages'
 import Live from "../pages/Live";
 
 
@@ -118,6 +118,11 @@ export const router = createBrowserRouter([
             {
                 path: '/admin/add-live',
                 element: <Addlive/>
+            }
+            ,
+            {
+                path: '/admin/blogs',
+                element: <Blogs/>
             }
 
 
