@@ -5,6 +5,7 @@ import {
     MusicNote,
     TipsAndUpdates,
     ArticleOutlined,
+    LocalMoviesOutlined,
 
     LiveTv,
     CreditCard,
@@ -130,42 +131,50 @@ const Sidebar = () => {
         </div>
 
 
-        <div className={`dashboard__menu ${active === 3 && 'dashboardActive'}`} onClick={() => {
+        <div className={`dashboard__menu ${active === 1 && 'dashboardActive'}`} onClick={() => {
+            nav('/admin/slider');
+            setActive(1)
+        }}>
+            <LocalMoviesOutlined/>
+            <h3> اسلایدر </h3>
+        </div>
+
+        <div className={`dashboard__menu ${active === 2 && 'dashboardActive'}`} onClick={() => {
             nav('/admin/blogs');
-            setActive(3)
+            setActive(2)
         }}>
             <ArticleOutlined/>
             <h3> بلاگ </h3>
         </div>
 
 
-        <div className={`dashboard__menu ${active === 6 && 'dashboardActive'}`} onClick={() => {
+        <div className={`dashboard__menu ${active === 3 && 'dashboardActive'}`} onClick={() => {
             nav('/admin/orders');
-            setActive(6)
+            setActive(3)
         }}>
             <CreditCard/>
             <h3> خریدها</h3>
         </div>
 
-        <div className={`dashboard__menu ${active === 7 && 'dashboardActive'}`} onClick={() => {
+        <div className={`dashboard__menu ${active === 4 && 'dashboardActive'}`} onClick={() => {
             nav('/admin/messages');
-            setActive(7)
+            setActive(4)
         }}>
             <Message/>
             <h3>پیام ها</h3>
         </div>
 
-        <div className={`dashboard__menu ${active === 8 && 'dashboardActive'}`} onClick={() => {
+        <div className={`dashboard__menu ${active === 5 && 'dashboardActive'}`} onClick={() => {
             nav('/admin/site-settings');
-            setActive(8)
+            setActive(5)
         }}>
             <Tune/>
             <h3> تنظیمات</h3>
         </div>
 
-        <div className={`dashboard__menu ${active === 9 && 'dashboardActive'}`} onClick={() => {
+        <div className={`dashboard__menu ${active === 6 && 'dashboardActive'}`} onClick={() => {
             nav('/admin/about');
-            setActive(9)
+            setActive(6)
         }}>
             <TipsAndUpdates/>
             <h3> راهنمای پنل</h3>

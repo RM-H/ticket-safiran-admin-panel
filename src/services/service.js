@@ -2,6 +2,7 @@ import axios from "axios";
 
 
 export const url = 'https://api.bilitim.net/api/v1'
+export const baseurl = 'https://api.bilitim.net'
 
 // bearer
 // const config = {
@@ -12,6 +13,11 @@ export const url = 'https://api.bilitim.net/api/v1'
 
 export const adminlogin = (d) => {
    return  axios.post(`${url}/login`,d)
+}
+
+
+export const getBlogs = (bear)=>{
+   return axios.get(`${url}/admin/blog/index`,bear)
 }
 
 
@@ -28,8 +34,12 @@ export const getMessages = (bear)=>{
    return axios.get(`${url}/admin/contact/index`,bear)
 }
 
-export const getFAQ = (bear)=>{
+export const getBiltimFAQ = (bear)=>{
    return axios.get(`${url}/admin/faq/index`,bear)
+}
+
+export const getSafiranFAQ = (bear)=>{
+   return axios.get(`${url}/admin/safiranfaq/index`,bear)
 }
 
 export const getSingers = (bear)=>{

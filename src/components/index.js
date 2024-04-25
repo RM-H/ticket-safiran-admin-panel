@@ -50,3 +50,7 @@ export {default as Pricebox} from './Pricing related/Pricebox'
 export {default as VideoListTable} from './Videos related/VideoTable'
 
 
+// -------------------------------------------Blogs related----------------------------------------
+export {default as BlogsTable} from './Blogs related/BlogsTable'
+
+

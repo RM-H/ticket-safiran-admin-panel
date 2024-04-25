@@ -64,7 +64,7 @@ const Navbar = () => {
 
 
     let sadiranEndpoints = [
-        '/admin' , '/admin/blogs' , '/admin/orders' , '/admin/messages' , '/admin/site-settings' , '/admin/about' , '/admin/site-settings/info'
+        '/admin' , '/admin/blogs' , '/admin/orders' , '/admin/messages' , '/admin/site-settings' , '/admin/about' , '/admin/site-settings/info', '/admin/site-settings/faq'
     ]
     // changing Website thats changing and redirecting to dashboard page if the page does not exist in the other web page
     const handleEnvChange = (e)=>{

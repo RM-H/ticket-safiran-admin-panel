@@ -798,3 +798,13 @@ main {
         left: 64px;
         width: 16px;
     }}
+
+
+
+
+
+/*shadows*/
+.shadowtwo {
+    box-shadow: 0.3rem 0.3rem 0.6rem 0px rgba(0,0,0,0.5);
+
+}
