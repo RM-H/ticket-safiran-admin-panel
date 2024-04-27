@@ -20,6 +20,10 @@ export const getBlogs = (bear)=>{
    return axios.get(`${url}/admin/blog/index`,bear)
 }
 
+export const getSingleBlog = (bear,id)=>{
+   return axios.get(`${url}/admin/blog/info/${id}`,bear)
+}
+
 
 export const webpageoptions = (bear)=>{
    return axios.get(`${url}/admin/option/index`,bear)

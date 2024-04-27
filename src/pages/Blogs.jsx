@@ -64,39 +64,7 @@ const Blogs = () => {
     }, []);
 
 
-    const handleUpdate = async (itemid, values) => {
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${dataneeded.user.token}`
-            }
-        }
-        const conf = window.confirm('آیا  مطمن هستید ؟')
-        if (conf) {
-            let endpoint
-            if (env === 1) {
-                endpoint = `${url}/admin/faq/edit/${itemid}`
-            } else {
-                endpoint = `${url}/admin/safiranfaq/edit/${itemid}`
-            }
-
-            const formdata = new FormData()
-            formdata.append("q", values.q)
-            formdata.append("answer", values.a)
-            const response = await axios.post(endpoint, formdata, config)
-            if (response) {
-                if (response.data.code === 1) {
-                    toast.success('با موفقیت بروز شد.');
-                    getData().then();
-                }
-            } else {
-                toast.error('اتصال خود را بررسی کنید')
-            }
-
-
-        }
-
-    }
 
 
     const handleAdd = async (values, img) => {
@@ -183,7 +151,7 @@ const Blogs = () => {
                                 </button>
 
                                 <button className='button is-link is-outlined mx-1'
-                                        onClick={() => nav(`/admin/events/${item.id}`)}>
+                                        onClick={() => nav(`/admin/blogs/${item.id}`)}>
                                     <Edit/>
                                 </button>
 
@@ -211,7 +179,7 @@ const Blogs = () => {
                     </h1>
 
                     <article className='subtitle yekan my-3 is-size-6'>
-                        مشاهده و ویرایش تنظیمات سوالات متداول مربوط به سایت در این قسمت صورت میگیرد.
+                        مشاهده و ویرایش پست های بلاگ مربوط به سایت سفیران نوآوری در این قسمت صورت میگیرد.
                     </article>
 
                 </div>
