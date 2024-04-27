@@ -24,6 +24,10 @@ export const getSingleBlog = (bear,id)=>{
    return axios.get(`${url}/admin/blog/info/${id}`,bear)
 }
 
+export const getSafiranSliders = (bear)=>{
+   return axios.get(`${url}/admin/safiranslider/index`,bear)
+}
+
 
 export const webpageoptions = (bear)=>{
    return axios.get(`${url}/admin/option/index`,bear)

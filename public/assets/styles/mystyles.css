@@ -25,6 +25,9 @@ body input::placeholder {
     background: red;
 }
 
+.button {
+    outline: none;
+}
 
 .Toastify__toast {
     font-family: yekan !important;
@@ -98,13 +101,62 @@ body {
     /* background: linear-gradient(to bottom, #0f0c29, #302b63,#24243e); */
 }
 .body-safir {
-    background: rgba(0, 166, 81, 0.10);
+    background: rgba(0, 166, 81, 0.06);
+    .clrtwo {
+        background-color: #00A651 !important;
+    }
+    .clrone {
+        background-color: #A60055 !important;
+        color: #ffffff;
+    }
+
+    .clrtwotext {
+        color: #00A651 !important;
+    }
+
+    .dashboard__menu svg {
+        font-size: 24px;
+        color: #5EBF55;
+    }
+    .dashboard__menu:hover {
+        background: #b7b4b4;
+        color: #ffffff !important;
+    }
+
+    .dashboardActive  {
+        background: #5EBF55
+
+
+
+    }
+    .dashboardActive svg  {
+        color: #ffffff !important;
+
+
+
+    }
+    .dashboardActive h3  {
+
+        color: #ffffff !important;
+
+
+    }
+    .header__icons svg {
+        margin-inline: 10px;
+        font-size: 25px;
+        cursor: pointer;
+        color: #00A651
+    }
+
+    .fa-gear {
+        color: #00A651 !important
+    }
 
 }
 
 
 .body-bilit {
-    background: rgba(162, 152, 192, 0.15);
+    background: rgba(51, 0, 255, 0.1)
 }
 
 /* login page */
@@ -426,7 +478,8 @@ main {
     width: 100%;
     border-radius: 1rem;
     background-color: white;
-    overflow: auto;
+    overflow-y: auto;
+
 }
 
 .welcome__master p {
@@ -807,4 +860,11 @@ main {
 .shadowtwo {
     box-shadow: 0.3rem 0.3rem 0.6rem 0px rgba(0,0,0,0.5);
 
+}
+
+
+
+/*editor helped by parham*/
+.ql-editor * {
+   text-align: right;
 }

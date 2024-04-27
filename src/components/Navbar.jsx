@@ -7,6 +7,7 @@ import {useNavigate} from 'react-router-dom'
 import Button from '@mui/material/Button';
 import {useState} from "react";
 import MenuItem from '@mui/material/MenuItem';
+import {toast} from "react-toastify";
 
 
 
@@ -69,6 +70,11 @@ const Navbar = () => {
     // changing Website thats changing and redirecting to dashboard page if the page does not exist in the other web page
     const handleEnvChange = (e)=>{
         dispatch(changeEnv(e.target.value))
+        if (e.target.value===1) {
+            toast('پنل انتخاب شده : بیلیتیم')
+        } else {
+            toast('پنل انتخاب شده : سفیران نوآوری')
+        }
 
         if (sadiranEndpoints.includes(String(window.location.pathname) )===false){
            nav('/admin')
@@ -148,6 +154,7 @@ const Navbar = () => {
                                             aria-haspopup="true"
                                             aria-expanded={open ? 'true' : undefined}
                                             onClick={handleClick}
+
                                         >
                                            <Settings className='fa-gear'/>
                                         </Button>

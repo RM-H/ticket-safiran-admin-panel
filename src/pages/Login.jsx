@@ -51,8 +51,13 @@ const Login = () => {
                 }}>
                     <input type="checkbox" id="chk" aria-hidden="true"/>
 
-                    <div className="signup is-size-5">
-                        <h2>به پنل تیکت آنلاین خوش آمدید </h2>
+                    <div className="signup is-size-5 has-text-centered">
+                        <h2>
+                            به پنل
+                          مدیریت
+
+                            خوش آمدید
+                        </h2>
                     </div>
 
                     <div className="login">

@@ -1,14 +1,15 @@
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
-import {Delete, DeleteOutline, Edit, NavigateBefore, NavigateNext, Schedule} from "@mui/icons-material";
+import {DeleteOutline, Edit, NavigateBefore, NavigateNext, Schedule} from "@mui/icons-material";
 import React, {useEffect, useState} from "react";
-import {getBlogs, url,baseurl} from "../services/service";
+import {getBlogs, url} from "../services/service";
 import axios from "axios";
 import {toast} from "react-toastify";
 import {useSelector} from "react-redux";
 import {environmentSelector, userinfoSelector} from "../slices/UserSlice";
 import {useNavigate} from "react-router-dom";
-import {Spinner,BlogsTable} from "../components";
+import {Spinner, BlogsTable} from "../components";
+import ReactQuill from "react-quill";
 
 
 const Blogs = () => {
@@ -18,6 +19,14 @@ const Blogs = () => {
     const [data, setdata] = useState(false)
     const [image, setImg] = useState('')
     const nav = useNavigate()
+    const [value, setValue] = useState('');
+
+    // pending
+    const [pending, setPending] = useState(false)
+
+
+    // filtering search
+    const [search, setSearch] = useState('')
 
 
     const env = useSelector(environmentSelector)
@@ -29,7 +38,7 @@ const Blogs = () => {
                 Authorization: `Bearer ${dataneeded.user.token}`
             },
             params: {
-                take: 6, page: page
+                take: 8, page: page, search: search
             }
         }
 
@@ -61,13 +70,10 @@ const Blogs = () => {
         } else {
             getData().then()
         }
-    }, []);
+    }, [search]);
 
 
-
-
-
-    const handleAdd = async (values, img) => {
+    const handleAdd = async (values, value, img) => {
 
         const config = {
             headers: {
@@ -81,12 +87,18 @@ const Blogs = () => {
 
             const formdata = new FormData()
             formdata.append("title", values.title)
-            formdata.append("txt", values.txt)
+            formdata.append("txt", value)
             formdata.append("img", img)
+            setPending(true)
+            toast.info('در حال ارسال ...')
             const response = await axios.post(endpoint, formdata, config)
             if (response) {
+                toast.dismiss()
                 if (response.data.code === 1) {
+
                     toast.success('با موفقیت اضافه شد.');
+                    setPending(false)
+                    setdata(false)
                     getData().then();
                 } else {
                     toast.warning(response.data.error)
@@ -109,17 +121,15 @@ const Blogs = () => {
         const conf = window.confirm('آیا از حذف مطمن هستید ؟')
         if (conf) {
 
-            let endpoint
-            if (env === 1) {
-                endpoint = `${url}/admin/faq/delete/${itemid}`
-            } else {
-                endpoint = `${url}/admin/safiranfaq/delete/${itemid}`
-            }
+            let endpoint = `${url}/admin/blog/delete/${itemid}`
+
             const response = await axios.get(endpoint, config)
             if (response) {
                 if (response.data.code === 1) {
                     toast.success('با موفقیت حذف شد.');
                     getData().then();
+                } else {
+                    toast.warning(response.data.error)
                 }
             } else {
                 toast.error('اتصال خود را بررسی کنید')
@@ -133,8 +143,8 @@ const Blogs = () => {
     if (data !== false) {
         content = <BlogsTable>
 
-            {data.items.map((item)=>{
-                return(
+            {data.items.map((item) => {
+                return (
                     <>
                         <tr key={item.id} className='has-text-centered yekan'>
 
@@ -186,6 +196,8 @@ const Blogs = () => {
 
 
                 <div className='column is-12 welcome__master my-2'>
+
+
                     <h3 className='yekan'>
                         اضافه کردن پست
                     </h3>
@@ -193,15 +205,14 @@ const Blogs = () => {
                     <Formik initialValues={{
                         title: '',
 
-                        txt: '',
 
                     }} validationSchema={Yup.object().shape({
 
                         title: Yup.string().required('ضروری').max(2000, 'باید کمتر از 2000 کاراکتر باشد'),
-                        txt: Yup.string().required('ضروری')
+
 
                     })} onSubmit={(values, actions) => {
-                        handleAdd(values,image);
+                        handleAdd(values, value, image);
                         actions.resetForm();
                     }}>
                         {({errors, touched}) => (
@@ -213,10 +224,9 @@ const Blogs = () => {
                                 <ErrorMessage component='span' className='has-text-danger yekan mx-auto' name='title'/>
 
 
-                                <label className='label mt-3 yekan' aria-hidden="true">متن</label>
-                                <Field className='yekan textarea my-2' as='textarea' rows='3' type="text" id="txt"
-                                       name="txt"/>
-                                <ErrorMessage component='span' className='has-text-danger yekan' name='txt'/>
+                                <label className='label mt-3 yekan' aria-hidden="true">متن پست</label>
+                                <ReactQuill className='has-text-centered' theme="snow" value={value}
+                                            onChange={setValue}/>
 
 
                                 <label className='label mt-3 yekan' aria-hidden="true"> عکس </label>
@@ -225,10 +235,34 @@ const Blogs = () => {
                                        name="img"/>
 
 
-                                <div className='has-text-centered'>
-                                    <button className='button clrone has-text-weight-bold  pinar mt-6 mx-3 borderrad1 '
+                                <label className='label mt-3 yekan' aria-hidden="true"> عکس انتخابی </label>
+
+
+                                {
+
+                                    image !== '' ?
+
+
+                                        <div className='has-text-centered'>
+                                            <img src={URL.createObjectURL(image)} alt="" 
+                                                 style={{maxWidth: '20rem'}}/>
+                                        </div>
+
+
+                                        :
+                                        <p className='has-text-centered'>
+                                            تصویری انتخاب کنید.
+                                        </p>
+                                }
+
+
+                                <div className='has-text-centered py-6'>
+                                    {
+                                        pending ? <Spinner/> : <button
+                                            className='button clrone has-text-weight-bold  pinar mt-6 mx-3 borderrad1 '
                                             type='submit'> اضافه کن
-                                    </button>
+                                        </button>
+                                    }
 
 
                                 </div>
@@ -241,6 +275,11 @@ const Blogs = () => {
 
 
                     </Formik>
+                </div>
+
+                <div className='column is-12 my-2 welcome__master'>
+                    <input className="input" onChange={(e) => setSearch(e.target.value)} type="text"
+                           placeholder="جستجو ..."/>
                 </div>
 
 
