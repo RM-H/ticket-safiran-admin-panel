@@ -16,13 +16,20 @@ const Pricebox = ({itemSelected, setHavePrice,haveprice,setItems}) => {
     const {sans} = useParams()
 
 
-    useEffect(() => {
-        if (haveprice.length>0){
-            haveprice.map((item)=>
-                document.getElementById(item.id).style.fill='#ffd500'
 
-            )
-        }
+    useEffect(() => {
+
+        setTimeout(()=>{
+            if (haveprice.length>0){
+                haveprice.map((item)=>
+                    document.getElementById(item.id).style.fill='#ffd500'
+
+                )
+            }
+        } , 500)
+
+
+
 
 
     }, [haveprice]);
@@ -141,6 +148,7 @@ const Pricebox = ({itemSelected, setHavePrice,haveprice,setItems}) => {
 
             </tr>
         ))
+
     }
 
 

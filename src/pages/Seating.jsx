@@ -149,7 +149,7 @@ const Seating = () => {
                                     <>
 
                                         <p className={havePriceList.length > data.locations.count ? 'has-text-danger' : havePriceList.length < data.locations.count && 'has-text-warning'}>
-                                            صندلی های نتخاب شده :
+                                            صندلی های انتخاب شده :
                                             <span>
                         {havePriceList.length}
                     </span>
