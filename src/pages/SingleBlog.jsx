@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 
-import {Editor} from '@tinymce/tinymce-react';
+
 
 import React, {useEffect, useState} from 'react';
 import ReactQuill, {Quill} from 'react-quill';

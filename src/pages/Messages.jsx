@@ -67,15 +67,6 @@ const Messages = () => {
         }
 
 
-
-        // if (status !== 'done') {
-        //     nav('/');
-        //     toast.error('ابتدا وارد سیستم شو🤔')
-        //
-        //
-        // } else {
-        //     getData().then()
-        // }
     }, []);
 
 

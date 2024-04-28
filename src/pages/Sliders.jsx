@@ -2,7 +2,7 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 
 
-import {DeleteOutline, Edit, NavigateBefore, NavigateNext} from "@mui/icons-material";
+import {DeleteOutline, NavigateBefore, NavigateNext} from "@mui/icons-material";
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {userinfoSelector} from "../slices/UserSlice";
@@ -21,15 +21,14 @@ const Sliders = () => {
 
     // pending
     const [pending, setPending] = useState(false)
-    // filtering search
-    const [search,setSearch] = useState('')
+
     const getData = async (page) => {
         const config = {
             headers: {
                 Authorization: `Bearer ${dataneeded.user.token}`
             },
             params: {
-                take: 8, page: page , search:search
+                take: 8, page: page
             }
         }
 
@@ -61,7 +60,7 @@ const Sliders = () => {
         } else {
             getData().then()
         }
-    }, [search]);
+    }, []);
 
 
     const handleAdd = async (values, img) => {

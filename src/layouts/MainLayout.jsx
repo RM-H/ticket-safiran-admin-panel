@@ -3,7 +3,7 @@ import {Navbar,Sidebar} from "../components";
 
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {adduserinfo, environmentSelector,} from "../slices/UserSlice";
+import {addDashboard, adduserinfo, environmentSelector,} from "../slices/UserSlice";
 import {toast} from "react-toastify";
 import {getDashboard} from "../services/service";
 
@@ -31,6 +31,7 @@ const MainLayout = () => {
         if (response){
             if (response.data.code===1){
                 dispatch(adduserinfo(response.data))
+                dispatch(addDashboard(response.data))
             } else {
                 nav('/');
                 toast.warning(response.data.error)
@@ -49,7 +50,8 @@ const MainLayout = () => {
         const token = JSON.parse(localStorage.getItem('admin'))
        
         if (token){
-            getData(token).then()
+            setInterval(()=>getData(token).then(),3000)
+
 
 
 

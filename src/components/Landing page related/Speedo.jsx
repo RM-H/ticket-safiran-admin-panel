@@ -2,7 +2,7 @@ import GaugeComponent from 'react-gauge-component'
 import {useEffect, useState} from 'react'
 import {getDashboard} from '../../services/service'
 import {useDispatch, useSelector} from "react-redux";
-import {userinfoSelector,addDashboard} from "../../slices/UserSlice";
+import {dashboardSelector,addDashboard} from "../../slices/UserSlice";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 
@@ -10,10 +10,10 @@ import {toast} from "react-toastify";
 
 const Speedo = () => {
 
-    const dataneeded = useSelector(userinfoSelector)
-    const status = useSelector((state) => state.userinfo.status)
+
     const nav = useNavigate()
     const dispatch = useDispatch()
+    const dataNeeded = useSelector(dashboardSelector)
     const [data, setData] = useState(false)
 
 
@@ -28,6 +28,7 @@ const Speedo = () => {
         const response = await getDashboard(config)
         if (response){
             if (response.data.code===1) {
+
                dispatch(addDashboard(response.data))
                 setData(response.data.info)
             }
@@ -39,34 +40,23 @@ const Speedo = () => {
 
     }
 
-    //
-    // useEffect(() => {
-    //     const token = JSON.parse(localStorage.getItem('admin'))
-    //     console.log(token)
-    //     if (token){
-    //         getData(token).then()
-    //
-    //
-    //
-    //     } else {
-    //         nav('/');
-    //
-    //     }
-    // }, []);
+
 
 
     useEffect(() => {
-        const token = JSON.parse(localStorage.getItem('admin'))
-        if (token){
-            setInterval(()=>getData(token).then(),3000)
-        } else {
-            nav('/');
-            toast.error('ابتدا وارد سیستم شو🤔')
-        }
+        // const token = JSON.parse(localStorage.getItem('admin'))
+        // if (token){
+        //     setInterval(()=>getData(token).then(),3000)
+        // } else {
+        //     nav('/');
+        //     toast.error('ابتدا وارد سیستم شو🤔')
+        // }
+        setData(dataNeeded.info)
 
 
 
-    }, []);
+
+    }, [dataNeeded]);
 
 
 
